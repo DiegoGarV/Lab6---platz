@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,47 +31,55 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.lab5.R
+import com.example.lab5.ui.events.view.bottomBar
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ProfileScreen(navController: NavHostController){
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp)
-                .background(Color.LightGray)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.profile_background),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .fillMaxSize()
-            )
-            Image(
-                painter = painterResource(id = R.drawable.profile_pic), // Imagen superpuesta
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(16.dp)
-            )
-            Text(
-                text = "Diego García",
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(10.dp),
-                color = Color.White,
-                fontSize = 30.sp,
-                overflow = TextOverflow.Ellipsis
-            )
+    Scaffold(
+        bottomBar = {
+            bottomBar(navController = navController)
         }
-        Column {
-            for(i in 1..4){
-                RowMaker(num = i)
+    ) { innerPading ->
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+                    .background(Color.LightGray)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.profile_background),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.profile_pic), // Imagen superpuesta
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(16.dp)
+                )
+                Text(
+                    text = "Diego García",
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(10.dp),
+                    color = Color.White,
+                    fontSize = 30.sp,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+            Column {
+                for (i in 1..4) {
+                    RowMaker(num = i)
+                }
             }
         }
     }

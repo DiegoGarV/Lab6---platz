@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,59 +34,67 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.lab5.R
+import com.example.lab5.ui.events.view.bottomBar
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PlacesScreen(navController: NavHostController){
     val listaPaises = listOf("Luis Miguel Chile", "Luis Miguel Las Vegas", "Luis Miguel New York", "Luis Miguel Anaheim","Luis Miguel San Diego")
     val listaLugares = listOf("Movistar Arena (Santiago)", "Park MGM", "NYCB Theatre at Westburry", "Honda Center","Pechanga Arena")
 
-    LazyColumn (
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Scaffold(
+        bottomBar = {
+            bottomBar(navController = navController)
+        }
+    ) { innerPading ->
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
 
-        itemsIndexed(listaPaises) { i, city ->
-            val lugar = listaLugares[i]
-            val letra = listaPaises[i][12]
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                CircLetra(letter = letra)
+            itemsIndexed(listaPaises) { i, city ->
+                val lugar = listaLugares[i]
+                val letra = listaPaises[i][12]
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    CircLetra(letter = letra)
 
-                Column {
-                    Text(
-                        text = city,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
-                    )
-                    Text(
-                        text = lugar,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        fontSize = 14.sp
+                    Column {
+                        Text(
+                            text = city,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp
+                        )
+                        Text(
+                            text = lugar,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = 14.sp
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(90.dp))
+
+                    Image(
+                        painter = painterResource(id = R.drawable.triangulo),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(15.dp)
                     )
                 }
-
-                Spacer(modifier = Modifier.width(90.dp))
-
-                Image(
-                    painter = painterResource(id = R.drawable.triangulo),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
+                Divider(
                     modifier = Modifier
-                        .size(15.dp)
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                        .height(1.dp)
                 )
             }
-            Divider(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(1.dp)
-            )
         }
     }
 }

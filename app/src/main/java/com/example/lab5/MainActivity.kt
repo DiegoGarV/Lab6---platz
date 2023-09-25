@@ -12,6 +12,7 @@ import com.example.lab5.ui.events.view.EventScreen
 import com.example.lab5.ui.places.view.PlacesScreen
 import com.example.lab5.ui.details.view.DetailScreen
 import com.example.lab5.ui.profile.view.ProfileScreen
+import com.example.lab5.ui.theme.navigation.model.AppNavigation
 
 
 data class EventCard(val nombre:String, val descripcion: String, val url: String)
@@ -26,10 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //EventScreen()           //visualización de todos los eventos
-                    //PlacesScreen()          //información de los lugares
-                    //DetailScreen()          //información del evento
-                    //ProfileScreen()         //información del perfil
+                    AppNavigation()
                 }
             }
         }
