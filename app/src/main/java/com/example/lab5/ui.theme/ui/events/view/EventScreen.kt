@@ -83,7 +83,7 @@ fun EventScreen(navController: NavHostController) {
 
             Text(
                 text = "Your favorites",
-                modifier = Modifier.padding(start = 20.dp, top = 16.dp),
+                modifier = Modifier.padding(start = 20.dp, top = 70.dp),
                 fontSize = 30.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
@@ -164,7 +164,7 @@ fun EventScreen(navController: NavHostController) {
                 }
 
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 70.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp) // Space between cards
                 ) {
                     val eventCard5 = EventCard(
